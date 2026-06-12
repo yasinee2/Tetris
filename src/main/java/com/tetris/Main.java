@@ -48,14 +48,14 @@ public class Main extends JPanel {
         getActionMap().put("space", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                spawnTetromino(tetrominoes.z());
+                spawnTetromino(tetrominoes.i());
             }
         });
         getActionMap().put("down", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("move");
-                moveTetrominoDown(tetrominoes.z(), new Point(0, 0));
+                moveTetrominoDown(tetrominoes.i(), new Point(0, 0));
             }
         });
     }
