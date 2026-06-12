@@ -1,3 +1,8 @@
 {
-    "java.project.sourcePaths": ["src/main/java"]
+    "java.project.sourcePaths": [
+        "src/main/java"
+    ],
+    "cSpell.words": [
+        "tetrominoes"
+    ]
 }

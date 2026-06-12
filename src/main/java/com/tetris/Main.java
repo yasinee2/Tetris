@@ -44,7 +44,7 @@ public class Main extends JPanel {
         getActionMap().put("space", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("SPACE");
+                renderTetromino(tetrominoes.z());
             }
         });
     }
@@ -69,29 +69,36 @@ public class Main extends JPanel {
 
         int x = 0;
         int y = 0;
-        if (cells.size() != FIELD_HEIGHT * FIELD_WIDTH) {
-            for (int i = 0; i < FIELD_HEIGHT * FIELD_WIDTH; i++) {
-                if (x > (FIELD_WIDTH - 1)) {
-                    x = 0;
-                    y++;
-                }
-                graphics.setColor(Color.WHITE);
-                cells.add(new Point(x * CELL_SIZE, y * CELL_SIZE));
-                graphics.drawRect(x * CELL_SIZE + offsetX, y * CELL_SIZE + offsetY, CELL_SIZE, CELL_SIZE);
-                x++;
+        for (int i = 0; i < FIELD_HEIGHT * FIELD_WIDTH; i++) {
+            if (x > (FIELD_WIDTH - 1)) {
+                x = 0;
+                y++;
             }
-        } else {
-            for (Point cell : cells) {
+            graphics.setColor(Color.WHITE);
+            cells.add(new Point(x * CELL_SIZE, y * CELL_SIZE));
+            graphics.drawRect(x * CELL_SIZE + offsetX, y * CELL_SIZE + offsetY, CELL_SIZE, CELL_SIZE);
+            x++;
+        }
+
+        if (OpenCells.isEmpty()) {
+            return;
+        }
+
+        for (Point cell : OpenCells) {
+            if (cell != null) {
+                System.out.println("Cell: " + cell);
                 graphics.setColor(Color.WHITE);
                 graphics.fillRect(cell.x * CELL_SIZE + offsetX, cell.y * CELL_SIZE + offsetY, CELL_SIZE, CELL_SIZE);
             }
         }
+
     }
 
     private void renderTetromino(Point[] tetromino) {
-        System.err.println("Rendering");
+        System.out.println("Rendering");
         for (Point tetro : tetromino) {
             OpenCells.add(tetro);
+            repaint();
         }
     }
 }
