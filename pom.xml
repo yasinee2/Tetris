@@ -7,6 +7,10 @@
     <groupId>com.tetris</groupId>
     <artifactId>tetris</artifactId>
     <version>1.0-SNAPSHOT</version>
+    
+    <build>
+        <sourceDirectory>src/main/java</sourceDirectory>
+    </build>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
