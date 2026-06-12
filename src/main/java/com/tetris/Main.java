@@ -41,10 +41,21 @@ public class Main extends JPanel {
         getInputMap(WHEN_IN_FOCUSED_WINDOW).put(
                 KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0), "space"
         );
+
+        getInputMap(WHEN_IN_FOCUSED_WINDOW).put(
+                KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), "down"
+        );
         getActionMap().put("space", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                renderTetromino(tetrominoes.z());
+                spawnTetromino(tetrominoes.z());
+            }
+        });
+        getActionMap().put("down", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("move");
+                moveTetrominoDown(tetrominoes.z(), new Point(0, 0));
             }
         });
     }
@@ -87,18 +98,32 @@ public class Main extends JPanel {
         for (Point cell : OpenCells) {
             if (cell != null) {
                 System.out.println("Cell: " + cell);
-                graphics.setColor(Color.WHITE);
+                graphics.setColor(Color.RED);
                 graphics.fillRect(cell.x * CELL_SIZE + offsetX, cell.y * CELL_SIZE + offsetY, CELL_SIZE, CELL_SIZE);
             }
         }
 
     }
 
-    private void renderTetromino(Point[] tetromino) {
+    private void spawnTetromino(Point[] tetromino) {
         System.out.println("Rendering");
         for (Point tetro : tetromino) {
             OpenCells.add(tetro);
             repaint();
         }
+    }
+
+    private void moveTetrominoDown(Point[] tetromino, Point LeftCorner) {
+        for (Point tetro : tetromino) {
+
+            OpenCells.remove(tetro);
+            if (tetro != null) {
+                tetro.y += LeftCorner.y + 1;
+                OpenCells.add(tetro);
+            }
+            System.out.println("New Tetro: " + tetro);
+
+        }
+        repaint();
     }
 }
