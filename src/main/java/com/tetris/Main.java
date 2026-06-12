@@ -3,13 +3,15 @@ package com.tetris;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
-import org.w3c.dom.events.MouseEvent;
+import javax.swing.KeyStroke;
 
 public class Main extends JPanel {
 
@@ -25,25 +27,35 @@ public class Main extends JPanel {
     private int offsetX;
     private int offsetY;
 
+    private Tetrominoes tetrominoes = new Tetrominoes();
+
     public static void main(String[] args) {
-        initWindow();
+        Main panel = new Main();
+        initWindow(panel);
+        panel.initListeners();
     }
 
     private void initListeners() {
-        addMouseListener(new MouseAdapter() {
+        setFocusable(true);
+
+        getInputMap(WHEN_IN_FOCUSED_WINDOW).put(
+                KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0), "space"
+        );
+        getActionMap().put("space", new AbstractAction() {
             @Override
-            public void mouseReleased(MouseEvent e) {
-                RenderOpenCells(new Point(e.getX(), e.getY()));
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("SPACE");
             }
         });
     }
 
-    private static void initWindow() {
+    private static void initWindow(Main panel) {
         JFrame frame = new JFrame();
         frame.setSize(java.awt.Toolkit.getDefaultToolkit().getScreenSize());
-        frame.add(new Main());
+        frame.add(panel);
         frame.setTitle("Tetris");
         frame.setVisible(true);
+        panel.requestFocusInWindow();
     }
 
     @Override
@@ -77,6 +89,7 @@ public class Main extends JPanel {
     }
 
     private void renderTetromino(Point[] tetromino) {
+        System.err.println("Rendering");
         for (Point tetro : tetromino) {
             OpenCells.add(tetro);
         }
