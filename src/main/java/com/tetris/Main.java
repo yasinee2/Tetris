@@ -55,9 +55,13 @@ public class Main extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("move");
-                moveTetrominoDown(tetrominoes.i(), new Point(0, 0));
-            }
-        });
+                moveTetrominoDown(tetrominoes.i()
+                (), new Point(0, 0)
+        
+            );
+    }
+
+    });
     }
 
     private static void initWindow(Main panel) {
@@ -106,7 +110,7 @@ public class Main extends JPanel {
     }
 
     private void spawnTetromino(Point[] tetromino) {
-        System.out.println("Rendering");
+        System.out.println("Spawning");
         for (Point tetro : tetromino) {
             OpenCells.add(tetro);
             repaint();

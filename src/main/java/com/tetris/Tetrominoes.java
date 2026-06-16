@@ -51,11 +51,20 @@ public class Tetrominoes {
 
     public Point[] i() {
         Point[] output = new Point[5];
-        output[0] = new Point(0, 0);
-        output[1] = new Point(0, 1);
-        output[2] = new Point(0, 2);
-        output[3] = new Point(0, 3);
         output[4] = new Point(0, 4);
+        output[3] = new Point(0, 3);
+        output[2] = new Point(0, 2);
+        output[1] = new Point(0, 1);
+        output[0] = new Point(0, 0);
+        return output;
+    }
+
+    public Point[] t() {
+        Point[] output = new Point[5];
+        output[0] = new Point(1, 1);
+        output[1] = new Point(2, 0);
+        output[2] = new Point(1, 0);
+        output[4] = new Point(0, 0);
         return output;
     }
 
