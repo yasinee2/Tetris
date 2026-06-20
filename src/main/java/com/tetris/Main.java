@@ -27,6 +27,7 @@ public class Main extends JPanel {
     private int offsetY;
 
     public static void main(String[] args) {
+        Piece piece = new Piece(Pieces.T, 1);
         Main panel = new Main();
         initWindow(panel);
         panel.initListeners();
