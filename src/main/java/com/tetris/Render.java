@@ -41,7 +41,6 @@ public class Render extends JPanel {
         int x = 0;
         int y = 0;
         for (int i = 0; i < FIELD_HEIGHT * FIELD_WIDTH; i++) {
-            System.out.println("Rendering cell: " + x + ", " + y);
             if (x >= FIELD_WIDTH) {
                 x = 0;
                 y++;
@@ -82,7 +81,7 @@ public class Render extends JPanel {
     private static void DrawCell(int CellX, int CellY, Color color) {
         int PosX = CellX * CELL_SIZE + offsetX;
         int PosY = CellY * CELL_SIZE + offsetY;
-        int ExtraOffset = 1; // for a outline
+        int ExtraOffset = 1; // for a outline around white
         if (color.equals(Color.white)) {
             graphics.setColor(color);
             graphics.drawRect(PosX, PosY, CELL_SIZE - ExtraOffset, CELL_SIZE - ExtraOffset);
@@ -90,7 +89,6 @@ public class Render extends JPanel {
             graphics.setColor(color);
             graphics.fillRect(PosX, PosY, CELL_SIZE, CELL_SIZE);
         }
-        System.out.println(color + " at: " + CellX + ", " + CellY);
 
     }
 }
