@@ -88,7 +88,7 @@ public class Render extends JPanel {
             graphics.drawRect(PosX, PosY, CELL_SIZE - ExtraOffset, CELL_SIZE - ExtraOffset);
         } else {
             graphics.setColor(color);
-            graphics.fillRect(PosX, PosY, CELL_SIZE - ExtraOffset, CELL_SIZE - ExtraOffset);
+            graphics.fillRect(PosX, PosY, CELL_SIZE, CELL_SIZE);
         }
         System.out.println(color + " at: " + CellX + ", " + CellY);
 
