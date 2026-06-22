@@ -8,13 +8,12 @@ import javax.swing.JPanel;
 
 public class Render extends JPanel {
 
-    private Graphics graphics;
-    private Main main = new Main();
-    private int offsetX;
-    private int offsetY;
-    private int FIELD_HEIGHT = Main.FIELD_HEIGHT;
-    private int FIELD_WIDTH = Main.FIELD_WIDTH;
-    private int CELL_SIZE = Main.CELL_SIZE;
+    private static Graphics graphics;
+    private static int offsetX;
+    private static int offsetY;
+    private static int FIELD_HEIGHT = Main.FIELD_HEIGHT;
+    private static int FIELD_WIDTH = Main.FIELD_WIDTH;
+    private static int CELL_SIZE = Main.CELL_SIZE;
 
     public Render() {
     }
@@ -32,20 +31,66 @@ public class Render extends JPanel {
         this.graphics = graphics;
         super.paintComponent(graphics);
         graphics.setColor(Color.black);
-        graphics.fillRect(0, 0, main.WINDOW_WIDTH, main.WINDOW_HEIGHT);
-        offsetX = (main.WINDOW_WIDTH / 2) - (FIELD_HEIGHT * FIELD_WIDTH) / 2;
-        offsetY = (main.WINDOW_HEIGHT / 2) - (CELL_SIZE * FIELD_HEIGHT) / 2;
-        renderCells(new int[][] a = int[
-
-    
-    4][5]);
+        graphics.fillRect(0, 0, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
+        offsetX = (Main.WINDOW_WIDTH / 2) - FIELD_WIDTH * CELL_SIZE / 2;
+        offsetY = 0;
+        Main.test();
     }
 
-    public void renderCells(int[][] blocks) {
-        System.out.println(blocks.length);
+    public static void renderCells(int[][] blocks) {
         int x = 0;
         int y = 0;
+        for (int i = 0; i < FIELD_HEIGHT * FIELD_WIDTH; i++) {
+            System.out.println("Rendering cell: " + x + ", " + y);
+            if (x >= FIELD_WIDTH) {
+                x = 0;
+                y++;
+            }
+            switch (blocks[x][y]) {
+                case 0:
+                    DrawCell(x, y, Color.white);
+                    break;
+                case 1:
+                    DrawCell(x, y, Color.red);
+                    break;
+                case 2:
+                    DrawCell(x, y, Color.blue);
+                    break;
+                case 3:
+                    DrawCell(x, y, Color.green);
+                    break;
+                case 4:
+                    DrawCell(x, y, Color.yellow);
+                    break;
+                case 5:
+                    DrawCell(x, y, Color.cyan);
+                    break;
+                case 6:
+                    DrawCell(x, y, Color.orange);
+                    break;
+                case 7:
+                    DrawCell(x, y, Color.red);
+                    break;
 
+                default:
+                    throw new AssertionError();
+            }
+            x++;
+        }
     }
 
+    private static void DrawCell(int CellX, int CellY, Color color) {
+        int PosX = CellX * CELL_SIZE + offsetX;
+        int PosY = CellY * CELL_SIZE + offsetY;
+        int ExtraOffset = 1; // for a outline
+        if (color.equals(Color.white)) {
+            graphics.setColor(color);
+            graphics.drawRect(PosX, PosY, CELL_SIZE - ExtraOffset, CELL_SIZE - ExtraOffset);
+        } else {
+            graphics.setColor(color);
+            graphics.fillRect(PosX, PosY, CELL_SIZE - ExtraOffset, CELL_SIZE - ExtraOffset);
+        }
+        System.out.println(color + " at: " + CellX + ", " + CellY);
+
+    }
 }
