@@ -1,6 +1,6 @@
 package com.tetris;
 
-public enum Pieces {
+public enum PieceType {
     O,
     S,
     I,
