@@ -17,7 +17,7 @@ public class Main extends JPanel {
     private Render render = new Render();
 
     public static void main(String[] args) {
-        Piece piece = new Piece(PieceType.T, 1);
+        new Piece(PieceType.T, 1);
         Main panel = new Main();
         Render.initWindow(panel);
 
