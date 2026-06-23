@@ -14,6 +14,7 @@ public class Main extends JPanel {
 
     public static int[][] testBlocks = new int[FIELD_WIDTH][FIELD_HEIGHT];
 
+    private InputHandler inputHandler = new InputHandler();
     private Render render = new Render();
 
     public static void main(String[] args) {
@@ -21,6 +22,9 @@ public class Main extends JPanel {
         Main panel = new Main();
         Render.initWindow(panel);
 
+        panel.add(panel.inputHandler);
+        panel.inputHandler.inputHandler();
+        panel.inputHandler.requestFocusInWindow();
     }
 
     @Override
