@@ -14,18 +14,21 @@ public class Main extends JPanel {
 
     public static int[][] testBlocks = new int[FIELD_WIDTH][FIELD_HEIGHT];
 
+    private InputHandler inputHandler = new InputHandler();
     private Render render = new Render();
 
     public static void main(String[] args) {
         Main panel = new Main();
         Render.initWindow(panel);
 
+        panel.add(panel.inputHandler);
+        panel.inputHandler.inputHandler();
+        panel.inputHandler.requestFocusInWindow();
     }
 
     @Override
     public void paintComponent(Graphics graphics) {
         render.paintcomponent(graphics);
-        new InputHandler().inputHandler();
     }
 
     public static void test() {

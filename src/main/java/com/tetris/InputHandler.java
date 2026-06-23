@@ -14,11 +14,10 @@ public class InputHandler extends JPanel {
     //e = turn clockwise
     //q = counterclockwise
     public void inputHandler() {
-        addKeyListener(
-                new KeyAdapter() {
+        setFocusable(true);
+        addKeyListener(new KeyAdapter() {
             @Override
-            public void keyPressed(KeyEvent e
-            ) {
+            public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                     pause();
                 }
@@ -53,7 +52,7 @@ public class InputHandler extends JPanel {
     }
 
     private void moveBlock(char dir) { //NOTE: d = down; l = left; r = right
-        System.out.println(dir);
+        System.out.println("dir: " + dir);
     }
 
     private void softFall() {

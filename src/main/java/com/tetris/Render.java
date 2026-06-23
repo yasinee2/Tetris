@@ -25,6 +25,7 @@ public class Render extends JPanel {
         frame.setTitle("Tetris");
         frame.setVisible(true);
         panel.requestFocusInWindow();
+
     }
 
     public void paintcomponent(Graphics graphics) {
