@@ -18,7 +18,10 @@ public class Piece {
     }
 
     private Piece(int[][] blocks) {
-        this.blocks = blocks;
+        this.blocks = new int[blocks.length][];
+        for (int i = 0; i < blocks.length; i++) {
+            this.blocks[i] = blocks[i].clone();
+        }
     }
 
     public void rotateCw() {

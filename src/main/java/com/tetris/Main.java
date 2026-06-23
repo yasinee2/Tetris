@@ -1,7 +1,6 @@
 package com.tetris;
 
 import java.awt.Graphics;
-
 import javax.swing.JPanel;
 
 public class Main extends JPanel {
@@ -9,22 +8,33 @@ public class Main extends JPanel {
     public static final int WINDOW_WIDTH = 1920;
     public static final int WINDOW_HEIGHT = 1080;
     public static final int CELL_SIZE = 50;
-    public static final int FIELD_HEIGHT = 20;
-    public static final int FIELD_WIDTH = 10;
-
-    public static int[][] testBlocks = new int[FIELD_WIDTH][FIELD_HEIGHT];
 
     private InputHandler inputHandler = new InputHandler();
     private Render render = new Render();
 
     public static void main(String[] args) {
-        new Piece(PieceType.T, 1);
         Main panel = new Main();
         Render.initWindow(panel);
 
+        var cells = new Cells();
+        cells.addPiece(PieceType.T);
+
         panel.add(panel.inputHandler);
         panel.inputHandler.inputHandler();
+        panel.inputHandler.setCells(cells);
         panel.inputHandler.requestFocusInWindow();
+
+        long tick = 0;
+        long lastTime = System.nanoTime();
+        while (true) {
+            long now = System.nanoTime();
+            tick += now - lastTime;
+            lastTime = now;
+            while (tick > 500_000_000L) {
+                cells.update();
+                tick -= 500_000_000L;
+            }
+        }
     }
 
     @Override
@@ -32,25 +42,22 @@ public class Main extends JPanel {
         render.paintcomponent(graphics);
     }
 
-    public static void test() {
+    public static void test(Render render) {
         System.out.println("Currently testing");
+        int[][] testBlocks = new int[Cells.HEIGHT][Cells.WIDTH];
         int x = 0;
         int y = 0;
         int colorID = 0;
-        for (int i = 0; i < FIELD_WIDTH * FIELD_HEIGHT; i++) {
-            if (x >= FIELD_WIDTH) {
+        for (int i = 0; i < Cells.WIDTH * Cells.HEIGHT; i++) {
+            if (x >= Cells.WIDTH) {
                 x = 0;
                 y++;
             }
-            if (colorID >= 7) {
-                colorID = 0;
-            } else {
-                colorID++;
-            }
-            testBlocks[x][y] = colorID;
+            if (colorID >= 7) colorID = 1;
+            else colorID++;
+            testBlocks[y][x] = colorID;
             x++;
         }
         Render.renderCells(testBlocks);
     }
-
 }
