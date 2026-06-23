@@ -2,6 +2,7 @@ package com.tetris;
 
 import java.awt.Color;
 import java.awt.Graphics;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -11,10 +12,15 @@ public class Render extends JPanel {
     private static int offsetX;
     private static int offsetY;
     private static int CELL_SIZE = Main.CELL_SIZE;
+    private static JPanel displayPanel; 
+
+    private static int[][] currentBlocks; 
 
     public Render() {}
 
+
     protected static void initWindow(Main panel) {
+        displayPanel = panel; 
         JFrame frame = new JFrame();
         frame.setSize(java.awt.Toolkit.getDefaultToolkit().getScreenSize());
         frame.add(panel);
@@ -24,18 +30,25 @@ public class Render extends JPanel {
         panel.requestFocusInWindow();
     }
 
-    public void paintcomponent(Graphics graphics) {
+    public void paintComponent(Graphics graphics) {
         Render.graphics = graphics;
         super.paintComponent(graphics);
         graphics.setColor(Color.black);
         graphics.fillRect(0, 0, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
         offsetX = (Main.WINDOW_WIDTH / 2) - (Cells.WIDTH * CELL_SIZE) / 2;
         offsetY = 0;
+
+        if (currentBlocks != null) {
+            drawBlocks(currentBlocks);
+        }
     }
 
     public static void renderCells(int[][] blocks) {
-        if (graphics == null) return; // not yet initialized
+        currentBlocks = blocks;
+        if (displayPanel != null) displayPanel.repaint(); // <-- Main neu zeichnen lassen
+    }
 
+    private static void drawBlocks(int[][] blocks) {
         for (int y = 0; y < Cells.HEIGHT; y++) {
             for (int x = 0; x < Cells.WIDTH; x++) {
                 switch (blocks[y][x]) {

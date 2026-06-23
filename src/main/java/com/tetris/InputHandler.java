@@ -2,12 +2,12 @@ package com.tetris;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
 import javax.swing.JPanel;
 
 public class InputHandler extends JPanel {
 
     private Cells cells;
-
     //esc = pause
     //a,s,d = move block
     //space = soft fall

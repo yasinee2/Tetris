@@ -1,6 +1,7 @@
 package com.tetris;
 
 import java.awt.Graphics;
+
 import javax.swing.JPanel;
 
 public class Main extends JPanel {
@@ -15,15 +16,16 @@ public class Main extends JPanel {
     public static void main(String[] args) {
         Main panel = new Main();
         Render.initWindow(panel);
-
+        
+        
         var cells = new Cells();
         cells.addPiece(PieceType.T);
-
+        
         panel.add(panel.inputHandler);
         panel.inputHandler.inputHandler();
         panel.inputHandler.setCells(cells);
         panel.inputHandler.requestFocusInWindow();
-
+        
         long tick = 0;
         long lastTime = System.nanoTime();
         while (true) {
@@ -36,10 +38,10 @@ public class Main extends JPanel {
             }
         }
     }
-
+    
     @Override
     public void paintComponent(Graphics graphics) {
-        render.paintcomponent(graphics);
+        render.paintComponent(graphics);
     }
 
     public static void test(Render render) {
@@ -55,6 +57,8 @@ public class Main extends JPanel {
             }
             if (colorID >= 7) colorID = 1;
             else colorID++;
+
+            System.out.println(testBlocks[y][x]);
             testBlocks[y][x] = colorID;
             x++;
         }
