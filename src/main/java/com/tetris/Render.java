@@ -45,7 +45,7 @@ public class Render extends JPanel {
 
     public static void renderCells(int[][] blocks) {
         currentBlocks = blocks;
-        if (displayPanel != null) displayPanel.repaint(); // <-- Main neu zeichnen lassen
+        if (displayPanel != null) displayPanel.repaint(); 
     }
 
     private static void drawBlocks(int[][] blocks) {
