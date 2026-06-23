@@ -8,7 +8,7 @@ public class Main extends JPanel {
 
     public static final int WINDOW_WIDTH = 1920;
     public static final int WINDOW_HEIGHT = 1080;
-    public static final int CELL_SIZE = 50;
+    public static final int CELL_SIZE = 40;
 
     private InputHandler inputHandler = new InputHandler();
     private Render render = new Render();
