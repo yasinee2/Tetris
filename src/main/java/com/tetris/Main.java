@@ -25,6 +25,7 @@ public class Main extends JPanel {
     @Override
     public void paintComponent(Graphics graphics) {
         render.paintcomponent(graphics);
+        new InputHandler().inputHandler();
     }
 
     public static void test() {
