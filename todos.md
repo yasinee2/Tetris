@@ -1,0 +1,4 @@
+- add line clearing
+- add "aim trail"
+- add block holding
+- add fail condition -> change spawn pos (place grid higher up) 
